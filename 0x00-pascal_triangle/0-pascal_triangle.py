@@ -22,7 +22,7 @@ def combination(n, r):
 
 
 def pascal_triangle(n):
-      """Create a function def pascal_triangle(n): that returns a list of lists
+    """Create a function def pascal_triangle(n): that returns a list of lists
     """
     triangle = []
     if n <= 0:
