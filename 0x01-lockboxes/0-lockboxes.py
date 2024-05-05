@@ -3,14 +3,16 @@
 
 
 def canUnlockAll(boxes):
-
-    def dfs(box, visited):
-        visited[box] = True
-        for key in boxes[box]:
-            if not visited[key]:
-                dfs(key, visited)
-
     n = len(boxes)
     visited = [False] * n
-    dfs(0, visited)
+    visited[0] = True
+    stack = [0]
+
+    while stack:
+        current_box = stack.pop()
+        for key in boxes[current_box]:
+            if not visited[key]:
+                visited[key] = True
+                stack.append(key)
+
     return all(visited)
