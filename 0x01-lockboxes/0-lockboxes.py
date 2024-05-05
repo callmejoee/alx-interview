@@ -3,23 +3,23 @@
 
 
 def canUnlockAll(boxes):
-    """
-    Determine if all boxes can be opened.
-    """
-
-    if not boxes or not boxes[0]:
+    if not boxes or type(boxes) is not list or not boxes[0]:
         return False
 
     n = len(boxes)
     visited = [False] * n
     visited[0] = True
-    stack = [0]
+    queue = [0]
 
-    while stack:
-        current_box = stack.pop()
+    while queue:
+        current_box = queue.pop(0)
         for key in boxes[current_box]:
-            if not visited[key] and key < n:
+            if not isinstance(key, int):
+                return False  # Non-integer key found
+            if key < 0 or key >= n:
+                return False  # Key out of range
+            if not visited[key]:
                 visited[key] = True
-                stack.append(key)
+                queue.append(key)
 
     return all(visited)
