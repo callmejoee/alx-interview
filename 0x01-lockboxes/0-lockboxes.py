@@ -9,7 +9,7 @@ def canUnlockAll(boxes):
 
     if not boxes or not boxes[0]:
         return False
-        
+
     n = len(boxes)
     visited = [False] * n
     visited[0] = True
