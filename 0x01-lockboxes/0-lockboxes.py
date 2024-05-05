@@ -18,7 +18,7 @@ def canUnlockAll(boxes):
                 return False  # Non-integer key found
             if key < 0 or key >= n:
                 return False  # Key out of range
-            if not visited[key]:
+            if not visited[key] and key != current_box:
                 visited[key] = True
                 queue.append(key)
 
