@@ -3,23 +3,15 @@
 
 
 def canUnlockAll(boxes):
-    if not boxes or type(boxes) is not list or not boxes[0]:
-        return False
-
-    n = len(boxes)
-    visited = [False] * n
-    visited[0] = True
-    queue = [0]
-
-    while queue:
-        current_box = queue.pop(0)
-        for key in boxes[current_box]:
-            if not isinstance(key, int):
-                return False  # Non-integer key found
-            if key < 0 or key >= n:
-                return False  # Key out of range
-            if not visited[key]:
-                visited[key] = True
-                queue.append(key)
-
-    return all(visited)
+""" main function"""
+    num_of_boxes = len(boxes)
+    seen_boxes = set([0])
+    unseen_boxes = set(boxes[0]).difference(set([0]))
+    while len(unseen_boxes) > 0:
+        box = unseen_boxes.pop()
+        if not box or box >= n or box < 0:
+            continue
+        if box not in seen_boxes:
+            unseen_boxes = unseen_boxes.union(boxes[box])
+            seen_boxes.add(box)
+    return n == len(seen_boxes)
