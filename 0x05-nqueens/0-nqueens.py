@@ -2,6 +2,7 @@
 ''' module 0 '''
 import sys
 
+
 def print_usage_and_exit():
     print("Usage: nqueens N")
     sys.exit(1)
