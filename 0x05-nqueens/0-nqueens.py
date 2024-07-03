@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-''' module '''
+''' module 0 '''
 import sys
 
 
@@ -74,3 +74,6 @@ def main():
 
     for solution in solutions:
         print(solution)
+
+
+main()
