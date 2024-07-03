@@ -1,7 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 ''' module 0 '''
 import sys
-
 
 def print_usage_and_exit():
     print("Usage: nqueens N")
