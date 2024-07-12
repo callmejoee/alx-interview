@@ -22,23 +22,34 @@ request(url, (error, response, body) => {
   }
 
   const data = JSON.parse(body);
-  const characters = data.characters;
+  const characterUrls = data.characters;
 
-  characters.forEach((characterUrl) => {
-    request(characterUrl, (charError, charResponse, charBody) => {
-      if (charError) {
-        console.error('Error:', charError);
-        return;
-      }
+  // Fetch all character data and print in order
+  const characterPromises = characterUrls.map((characterUrl) => {
+    return new Promise((resolve, reject) => {
+      request(characterUrl, (charError, charResponse, charBody) => {
+        if (charError) {
+          reject(charError);
+          return;
+        }
 
-      if (charResponse.statusCode !== 200) {
-        console.error('Failed to fetch character data. Status code:', charResponse.statusCode);
-        return;
-      }
+        if (charResponse.statusCode !== 200) {
+          reject(new Error(`Failed to fetch character data. Status code: ${charResponse.statusCode}`));
 
-      const characterData = JSON.parse(charBody);
-      console.log(characterData.name);
+          return;
+        }
+
+        const characterData = JSON.parse(charBody);
+        resolve(characterData.name);
+      });
     });
   });
-});
 
+  Promise.all(characterPromises)
+    .then((characterNames) => {
+      characterNames.forEach((name) => console.log(name));
+    })
+    .catch((err) => {
+      console.error('Error:', err);
+    });
+});
