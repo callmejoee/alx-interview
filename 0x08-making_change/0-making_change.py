@@ -4,6 +4,7 @@
 from collections import deque
 from typing import List
 
+
 def makeChange(coins: List[int], total: int) -> int:
     ''' Function to get the change using BFS '''
     if total <= 0:
