@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+''' module 1 '''
 def island_perimeter(grid):
+    ''' function returns the perimeter '''
     perimeter = 0
     rows = len(grid)
     cols = len(grid[0])
